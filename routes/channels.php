@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('messenger.{sender}.{receiver}', function ($user) {
+Broadcast::channel('messenger.{sender}.{receiver}', function ($user, $sender, $receiver) {
     return !is_null($user);
 });
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {

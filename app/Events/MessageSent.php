@@ -28,10 +28,13 @@ class MessageSent implements ShouldBroadcastNow
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel
+     * @return PrivateChannel[]
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('messenger.' . $this->message->sender_id . '.' . $this->message->receiver_id);
+        return [
+            new PrivateChannel('messenger.' . $this->message->sender_id . '.' . $this->message->receiver_id),
+            new PrivateChannel('messenger.' . $this->message->receiver_id . '.' . $this->message->sender_id)
+        ];
     }
 }

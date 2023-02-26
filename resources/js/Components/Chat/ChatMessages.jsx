@@ -3,19 +3,16 @@ import {useEffect, useState} from "react";
 export default function ChatMessages({messages, receiver, sender, update, setUpdate, messagesEndRef}) {
 
     const [allMessages, setAllMessages] = useState(messages);
+    const [count, setCount] = useState(messages.length)
 
     useEffect(() => {
         Echo.private(`messenger.${receiver.id}.${parseInt(sender.id)}`)
             .listen('MessageSent', (e) => {
-                setAllMessages([...allMessages, e.message])
-                messagesEndRef.current.scrollIntoView({behavior: 'smooth'});
+                if (count === allMessages.length) {
+                    setAllMessages((prevData) => [...prevData, e.message]); // append new data to existing data
+                }
             });
-        Echo.private(`messenger.${parseInt(sender.id)}.${receiver.id}`)
-            .listen('MessageSent', (e) => {
-                setAllMessages([...allMessages, e.message])
-                messagesEndRef.current.scrollIntoView({behavior: 'smooth'});
-            });
-    }, [])
+    }, [count])
 
     return (
         <>
