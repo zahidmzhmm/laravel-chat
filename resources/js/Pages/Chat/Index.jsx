@@ -11,27 +11,25 @@ export default function Index(props) {
             auth={props.auth}
             errors={props.errors}
         >
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div className="">
                 <div className="messanger overflow-hidden p-4" style={{height: "93.5vh"}}>
                     <div className="flex">
                         <div className="basis-2/6 border-r border-slate-100 bg-white pt-3">
-                            {props.recentMessages !== undefined && <ChatSidebar recentMessages={props.recentMessages}/>}
+                            <ChatSidebar recentMessages={props.recentMessages}/>
                         </div>
 
                         <div className="basis-4/6">
-                            <div className="flex justify-center items-center bg-slate-100 h-screen">
+                            {/*<div className="flex justify-center items-center bg-slate-100 h-screen">
                                 <p className="font-bold text-3xl text-gray-500">
                                     Please select a User to start chatting...
                                 </p>
-                            </div>
-                             <ChatUserInfoHeader />
-
+                            </div>*/}
+                            <ChatUserInfoHeader/>
                             <div className="messanger mt-4">
                                 <div className="px-4">
-                                    <ChatMessages />
+                                    <ChatMessages/>
                                 </div>
-
-                                <ChatInput />
+                                <ChatInput/>
                             </div>
                         </div>
                     </div>
