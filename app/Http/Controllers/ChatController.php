@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ChatController extends Controller
 {
@@ -21,11 +24,19 @@ class ChatController extends Controller
     /**
      * Show chats
      *
-     * @return Application|Factory|View
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('chat');
+        return Inertia::render('Chats/ChatPanel', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
+    }
+
+    public function users(Request $request)
+    {
+        return User::with('messages')->get();
     }
 
     /**
@@ -33,9 +44,12 @@ class ChatController extends Controller
      *
      * @return Builder[]|Collection
      */
-    public function messages()
+    public function messages(Request $request)
     {
-        return Message::with('user')->get();
+        return Message::with('user')
+            ->where('rec_id', '=', $request->rec_id)
+            ->where('message', '=', $request->message)
+            ->get();
     }
 
     /**
