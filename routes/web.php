@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'chats', 'as' => 'chat.'], function () {
         Route::get('/', [\App\Http\Controllers\ChatController::class, 'index'])->name('index');
-        Route::get('/store', [\App\Http\Controllers\ChatController::class, 'store'])->name('store');
+        Route::post('/store', [\App\Http\Controllers\ChatController::class, 'store'])->name('store');
     });
 });
 

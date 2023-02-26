@@ -3,9 +3,13 @@ import ChatMessages from '@/Components/Chat/ChatMessages';
 import ChatSidebar from '@/Components/Chat/ChatSidebar';
 import ChatUserInfoHeader from '@/Components/Chat/ChatUserInfoHeader';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import {useEffect, useRef, useState} from "react";
 
 export default function Index(props) {
-    console.log(props)
+
+    const [update, setUpdate] = useState(false);
+    const messagesEndRef = useRef(null);
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -24,10 +28,18 @@ export default function Index(props) {
                                 <>
                                     <ChatUserInfoHeader receiver={props.receiver}/>
                                     <div className="messanger mt-4">
-                                        <div className="px-4">
-                                            <ChatMessages auth={props.auth} messages={props.messages}/>
+                                        <div className="px-4 overflow-x-hidden overflow-y-scroll"
+                                             style={{height: "75vh"}}>
+                                            <ChatMessages messages={props.messages}
+                                                          setUpdate={setUpdate}
+                                                          update={update}
+                                                          sender={props.auth.user}
+                                                          receiver={props.receiver}
+                                                          messagesEndRef={messagesEndRef}
+                                            />
+                                            <div ref={messagesEndRef}/>
                                         </div>
-                                        <ChatInput/>
+                                        <ChatInput receiver={props.receiver} sender={props.auth.user}/>
                                     </div>
                                 </>
                                 :
