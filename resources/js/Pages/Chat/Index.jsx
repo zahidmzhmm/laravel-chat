@@ -12,10 +12,10 @@ export default function Index(props) {
             errors={props.errors}
         >
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div className="messanger overflow-hidden p-4" style={{height: "92vh"}}>
+                <div className="messanger overflow-hidden p-4" style={{height: "93.5vh"}}>
                     <div className="flex">
                         <div className="basis-2/6 border-r border-slate-100 bg-white pt-3">
-                            {/*<ChatSidebar recentMessages={props.recentMessages}/>*/}
+                            {props.recentMessages !== undefined && <ChatSidebar recentMessages={props.recentMessages}/>}
                         </div>
 
                         <div className="basis-4/6">
@@ -24,7 +24,7 @@ export default function Index(props) {
                                     Please select a User to start chatting...
                                 </p>
                             </div>
-                            {/* <ChatUserInfoHeader />
+                             <ChatUserInfoHeader />
 
                             <div className="messanger mt-4">
                                 <div className="px-4">
@@ -32,7 +32,7 @@ export default function Index(props) {
                                 </div>
 
                                 <ChatInput />
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
