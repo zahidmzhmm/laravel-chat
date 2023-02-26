@@ -5,7 +5,6 @@ import ChatUserInfoHeader from '@/Components/Chat/ChatUserInfoHeader';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function Index(props) {
-    console.log(props);
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -19,18 +18,18 @@ export default function Index(props) {
                         </div>
 
                         <div className="basis-4/6">
-                            {/*<div className="flex justify-center items-center bg-slate-100 h-screen">
+                            <div className="flex justify-center items-center bg-slate-100 h-screen">
                                 <p className="font-bold text-3xl text-gray-500">
                                     Please select a User to start chatting...
                                 </p>
-                            </div>*/}
-                            <ChatUserInfoHeader/>
+                            </div>
+                            {/*<ChatUserInfoHeader/>
                             <div className="messanger mt-4">
                                 <div className="px-4">
                                     <ChatMessages/>
                                 </div>
                                 <ChatInput/>
-                            </div>
+                            </div>*/}
                         </div>
                     </div>
                 </div>
