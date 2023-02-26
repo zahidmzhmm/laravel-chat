@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
 use App\Models\Message;
+use App\Models\User;
 use App\Repository\ChatRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -21,8 +22,11 @@ class ChatController extends Controller
     public function index(Request $request)
     {
         $messages = !empty($request->receiver_id) ? $this->chat->getUserMessages($request->user()->id, $request->receiver_id) : [];
+        $receiver = !empty($request->receiver_id) ? User::find($request->receiver_id) : 0;
         return Inertia::render('Chat/Index', [
-            'messages' => $messages
+            'messages' => $messages,
+            'recentMessages' => $this->chat->getRecentUsersWithMessage($request->user()->id),
+            'receiver' => $receiver
         ]);
     }
 

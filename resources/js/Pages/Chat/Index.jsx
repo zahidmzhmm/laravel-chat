@@ -19,18 +19,24 @@ export default function Index(props) {
                         </div>
 
                         <div className="basis-4/6">
-                            <div className="flex justify-center items-center bg-slate-100 h-screen">
-                                <p className="font-bold text-3xl text-gray-500">
-                                    Please select a User to start chatting...
-                                </p>
-                            </div>
-                            {/*<ChatUserInfoHeader/>
-                            <div className="messanger mt-4">
-                                <div className="px-4">
-                                    <ChatMessages/>
+                            {props.messages.length > 0 && parseInt(props.receiver) !== 0
+                                ?
+                                <>
+                                    <ChatUserInfoHeader receiver={props.receiver}/>
+                                    <div className="messanger mt-4">
+                                        <div className="px-4">
+                                            <ChatMessages auth={props.auth} messages={props.messages}/>
+                                        </div>
+                                        <ChatInput/>
+                                    </div>
+                                </>
+                                :
+                                <div className="flex justify-center items-center bg-slate-100 h-screen">
+                                    <p className="font-bold text-3xl text-gray-500">
+                                        Please select a User to start chatting...
+                                    </p>
                                 </div>
-                                <ChatInput/>
-                            </div>*/}
+                            }
                         </div>
                     </div>
                 </div>
